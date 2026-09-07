@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Accident Detection - Phone Sensor</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="app-header">
+    <h1>📱 Accident Detection Sensor</h1>
+</header>
+
+<div class="mobile-container">
+
+    <div class="panel">
+        <h3 style="margin-top:0;">Permissions</h3>
+        <button id="btn-enable" class="big-button btn-primary">ENABLE SENSORS &amp; LOCATION</button>
+        <p class="muted" style="font-size:0.85rem;">
+            Tap this once. Your browser will ask for Motion &amp; Location permission.
+        </p>
+    </div>
+
+    <div class="panel">
+        <h3 style="margin-top:0;">Device Status</h3>
+        <div class="status-row"><span class="muted">Sensor Status</span><span id="sensor-status">INACTIVE</span></div>
+        <div class="status-row"><span class="muted">GPS Status</span><span id="gps-status">INACTIVE</span></div>
+        <div class="status-row"><span class="muted">Server Connection</span><span id="server-status">UNKNOWN</span></div>
+        <div class="status-row"><span class="muted">Battery</span><span id="battery-status">Battery information unavailable</span></div>
+    </div>
+
+    <div class="panel">
+        <h3 style="margin-top:0;">Last Sensor Reading</h3>
+        <div class="status-row"><span class="muted">X</span><span class="sensor-value" id="acc-x">0.00</span></div>
+        <div class="status-row"><span class="muted">Y</span><span class="sensor-value" id="acc-y">0.00</span></div>
+        <div class="status-row"><span class="muted">Z</span><span class="sensor-value" id="acc-z">0.00</span></div>
+        <div class="status-row"><span class="muted">Acceleration Magnitude</span><span class="sensor-value" id="acc-mag">0.00</span></div>
+        <div class="status-row"><span class="muted">Latitude</span><span class="sensor-value" id="loc-lat">-</span></div>
+        <div class="status-row"><span class="muted">Longitude</span><span class="sensor-value" id="loc-lon">-</span></div>
+        <div class="status-row"><span class="muted">GPS Accuracy (m)</span><span class="sensor-value" id="loc-acc">-</span></div>
+    </div>
+
+    <div class="panel">
+        <h3 style="margin-top:0;">Configuration</h3>
+        <div class="status-row"><span class="muted">Device ID</span><span id="device-id-display">my-phone</span></div>
+        <div class="status-row"><span class="muted">Impact Threshold</span><span id="threshold-display">25 m/s²</span></div>
+    </div>
+
+    <div class="panel">
+        <button id="btn-test-accident" class="big-button btn-danger">🚨 Simulate Accident</button>
+        <div class="demo-label">DEMO / TEST ONLY — no real crash needed</div>
+    </div>
+
+    <div class="footer-note">
+        Educational prototype. Motion-threshold detection is not scientifically validated and can miss
+        real accidents or trigger false alarms. Keep this tab open and the screen unlocked while testing.
+    </div>
+</div>
+
+<!-- Countdown overlay -->
+<div id="countdown-overlay" class="countdown-overlay">
+    <div style="font-size:1.4rem; font-weight:700;">⚠️ POSSIBLE ACCIDENT DETECTED</div>
+    <div style="margin-top:8px;">Are you okay?</div>
+    <div style="margin-top:6px;">Emergency alert will be sent in:</div>
+    <div class="countdown-number" id="countdown-number">10</div>
+    <button id="btn-cancel-alert" class="big-button btn-safe" style="max-width:320px;">I'M OK - CANCEL ALERT</button>
+</div>
+
+<script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
+</body>
+</html>

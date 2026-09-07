@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accident Detection - Emergency Dashboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+</head>
+<body>
+
+<header class="app-header">
+    <h1>🚨 Accident Detection &amp; Emergency Monitoring System</h1>
+</header>
+
+<div class="container">
+
+    <div class="panel" style="display:flex; align-items:center; justify-content:space-between;">
+        <div>
+            <strong>SYSTEM STATUS:</strong>
+            <span id="system-status" class="status-active">ACTIVE</span>
+        </div>
+        <div class="muted" id="server-time">--</div>
+    </div>
+
+    <!-- Alert banner, hidden until an accident arrives -->
+    <div id="alert-banner" class="alert-banner">
+        <h2>🚨 ACCIDENT ALERT</h2>
+        <div>Possible accident detected!</div>
+        <div class="details">
+            <div>Device: <span id="alert-device">-</span></div>
+            <div>Time: <span id="alert-time">-</span></div>
+            <div>Impact: <span id="alert-impact">-</span> m/s²</div>
+            <div>Battery: <span id="alert-battery">-</span>%</div>
+            <div>Location: <span id="alert-location">-</span></div>
+            <div>GPS Accuracy: <span id="alert-accuracy">-</span></div>
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <div class="panel">
+            <h3 style="margin-top:0;">Accident Location Map</h3>
+            <div id="map"></div>
+        </div>
+
+        <div class="panel">
+            <h3 style="margin-top:0;">Latest Accident Details</h3>
+            <div class="status-row"><span class="muted">Device ID</span><span id="d-device">-</span></div>
+            <div class="status-row"><span class="muted">Timestamp</span><span id="d-time">-</span></div>
+            <div class="status-row"><span class="muted">Latitude</span><span id="d-lat">-</span></div>
+            <div class="status-row"><span class="muted">Longitude</span><span id="d-lon">-</span></div>
+            <div class="status-row"><span class="muted">GPS Accuracy</span><span id="d-acc">-</span></div>
+            <div class="status-row"><span class="muted">Impact Magnitude</span><span id="d-impact">-</span></div>
+            <div class="status-row"><span class="muted">Battery</span><span id="d-batt">-</span></div>
+            <div class="status-row"><span class="muted">Status</span><span id="d-status">-</span></div>
+            <div class="status-row"><span class="muted">Total Accidents Recorded</span><span id="d-total">0</span></div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h3 style="margin-top:0;">Accident History</h3>
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>ID</th><th>Device</th><th>Time</th><th>Latitude</th>
+                    <th>Longitude</th><th>Impact</th><th>Battery</th><th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="history-body">
+                <tr><td colspan="8" class="muted">No accident events yet.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer-note">
+        Educational prototype only — not a certified vehicle safety or medical system.<br>
+        Detection is based on simple motion thresholds and can produce false positives or miss real accidents.
+        This dashboard never contacts emergency services automatically.
+    </div>
+</div>
+
+<audio id="alert-sound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=" type="audio/wav">
+</audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

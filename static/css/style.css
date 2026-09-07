@@ -1,0 +1,252 @@
+/* style.css
+   Shared styling for the dashboard (laptop) and mobile (phone) pages. */
+
+:root {
+    --bg: #0f1420;
+    --panel: #161d2e;
+    --panel-light: #1f2a44;
+    --text: #e7ecf7;
+    --muted: #93a0bd;
+    --accent: #3b82f6;
+    --green: #22c55e;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --border: #29344d;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+header.app-header {
+    background: var(--panel);
+    padding: 18px 20px;
+    border-bottom: 2px solid var(--border);
+    text-align: center;
+}
+
+header.app-header h1 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.mobile-container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.status-active {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.status-inactive {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--red);
+    border: 1px solid var(--red);
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+@media (max-width: 800px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+#map {
+    height: 380px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+table.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+table.history-table th, table.history-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+table.history-table th {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.badge-sent {
+    color: var(--red);
+    font-weight: 600;
+}
+
+.badge-pending {
+    color: var(--amber);
+    font-weight: 600;
+}
+
+.badge-cancelled {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+/* --- Alert banner on dashboard --- */
+.alert-banner {
+    display: none;
+    background: linear-gradient(90deg, #7f1d1d, #ef4444);
+    border: 2px solid var(--red);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 16px;
+    animation: pulse-alert 1.2s infinite;
+}
+
+.alert-banner.show {
+    display: block;
+}
+
+.alert-banner h2 {
+    margin: 0 0 8px 0;
+}
+
+.alert-banner .details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    font-size: 0.95rem;
+}
+
+@keyframes pulse-alert {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+    70% { box-shadow: 0 0 0 14px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* --- Mobile page specific --- */
+.sensor-value {
+    font-family: "Consolas", monospace;
+    font-size: 1.1rem;
+}
+
+.big-button {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-danger {
+    background: var(--red);
+    color: white;
+}
+
+.btn-safe {
+    background: var(--green);
+    color: #06210f;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: white;
+}
+
+.demo-label {
+    font-size: 0.75rem;
+    color: var(--amber);
+    text-align: center;
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+}
+
+/* --- Countdown overlay --- */
+.countdown-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(127, 29, 29, 0.97);
+    z-index: 999;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.countdown-overlay.show {
+    display: flex;
+}
+
+.countdown-number {
+    font-size: 6rem;
+    font-weight: 800;
+    margin: 10px 0;
+}
+
+.status-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+}
+
+.status-row:last-child {
+    border-bottom: none;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.footer-note {
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 24px;
+    line-height: 1.5;
+}
